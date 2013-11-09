@@ -37,6 +37,7 @@ sendHipChatMessage = (roomID, text) ->
 
   req = https.get { host: 'api.hipchat.com', path: path }, (res) ->
     console.log "Sent '#{ text }' to room #{ roomID }, HTTP code #{ res.statusCode }"
+    console.log "Path was: #{ path }"
 
   req.on 'error', (err) ->
     console.log "Unable to send to room #{ roomID }: #{ err }"
@@ -62,15 +63,17 @@ app.post '/', (req, res) ->
   url = payload.pull_request.html_url
   isMerged = payload.pull_request.merged
 
-  if roomID = process.env.HIPCHAT_DETAIL_ROOM
+  roomID = process.env.HIPCHAT_DETAIL_ROOM
+  if roomID
     message = "PR #{ number } #{ action }: #{ title } (#{ person }) - #{ url }"
     sendHipChatMessage roomID, message
 
-  if roomID = process.env.HIPCHAT_ANNOUNCE_ROOM and isMerged
+  roomID = process.env.HIPCHAT_ANNOUNCE_ROOM
+  if roomID and isMerged
     message = "Pull request by #{ person } merged: #{ title }"
     sendHipChatMessage roomID, message
 
   res.send 200, 'ok'
 
-http.createServer(app).listen port, '0.0.0.0', ->
+http.createServer(app).listen port, ->
   console.log "Pull Request Notifier listening on http://localhost:#{ port }"
