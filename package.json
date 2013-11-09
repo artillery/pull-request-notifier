@@ -1,0 +1,29 @@
+{
+  "name": "pull-request-notifier",
+  "version": "0.0.1",
+  "description": "Notifies HipChat when GitHub pull requests are opened or merged",
+  "main": "app.coffee",
+  "scripts": {
+    "start": "coffee app",
+    "dev": "env $(cat .env) nodemon ./app.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/artillery/pull-request-notifier.git"
+  },
+  "keywords": [
+    "github",
+    "hipchat",
+    "hooks"
+  ],
+  "author": "Artillery",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artillery/pull-request-notifier/issues"
+  },
+  "homepage": "https://github.com/artillery/pull-request-notifier",
+  "dependencies": {
+    "express": "~3.4.4",
+    "request": "~2.27.0"
+  }
+}
