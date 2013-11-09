@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/artillery/pull-request-notifier",
   "dependencies": {
-    "express": "~3.4.4",
-    "request": "~2.27.0"
+    "express": "~3.4.4"
   }
 }
