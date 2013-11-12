@@ -63,6 +63,9 @@ app.post '/', (req, res) ->
   url = payload.pull_request.html_url
   isMerged = payload.pull_request.merged
 
+  if action is 'synchronized'
+    return res.send 200, 'ignored'
+
   roomID = process.env.HIPCHAT_DETAIL_ROOM
   if roomID
     message = "PR #{ number } #{ action }: #{ title } (#{ person }) - #{ url }"
