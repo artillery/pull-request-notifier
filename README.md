@@ -4,7 +4,7 @@ This app notifies one HipChat room when pull requests are updated (for engineers
 
 Here's the world's most helpful screenshot:
 
-[Imgur](http://i.imgur.com/R0Rj2vJ.png)
+![Imgur](http://i.imgur.com/R0Rj2vJ.png)
 
 [@bhardin](https://github.com/bhardin) pointed out that this functionality [mostly already exists as a Hubot plugin](https://github.com/github/hubot-scripts/blob/master/src/scripts/github-pull-request-notifier.coffee). However, it's a pain to test, and I got it working, and I don't have time to convert things to Hubot plugins right now :)
 
