@@ -12,10 +12,7 @@ https = require 'https'
 http = require 'http'
 querystring = require 'querystring'
 
-port = process.env.PORT or 9090
-
 app = express()
-app.set 'port', port
 app.use express.logger('dev')
 app.use express.bodyParser()
 app.use app.router
@@ -78,5 +75,7 @@ app.post '/', (req, res) ->
 
   res.send 200, 'ok'
 
-http.createServer(app).listen port, ->
-  console.log "Pull Request Notifier listening on http://localhost:#{ port }"
+server = http.createServer app
+server.listen process.env.PORT or 9090
+address = server.address()
+console.log "Pull Request Notifier listening on #{ address.address }:#{ address.port }"
