@@ -60,7 +60,7 @@ app.post '/', (req, res) ->
   url = payload.pull_request.html_url
   isMerged = payload.pull_request.merged
 
-  if action is 'synchronized'
+  if action is 'synchronize'
     return res.send 200, 'ignored'
 
   roomID = process.env.HIPCHAT_DETAIL_ROOM
@@ -68,7 +68,7 @@ app.post '/', (req, res) ->
     # We prefix our PR titles with names of who should review them, like
     # "IAN/MARK: This fixes the thing". Might as well use @-style addressing in
     # the eng room chat so people are notified.
-    newTitle = title.replace /([A-Z]+)([:/])/g, '@$1$2'
+    newTitle = title.replace /([A-Z]+)([:/])/g, '@$1 '
     message = "PR #{ number } #{ action }: #{ newTitle } (#{ person }) - #{ url }"
     sendHipChatMessage roomID, message
 
