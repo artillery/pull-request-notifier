@@ -65,7 +65,11 @@ app.post '/', (req, res) ->
 
   roomID = process.env.HIPCHAT_DETAIL_ROOM
   if roomID
-    message = "PR #{ number } #{ action }: #{ title } (#{ person }) - #{ url }"
+    # We prefix our PR titles with names of who should review them, like
+    # "IAN/MARK: This fixes the thing". Might as well use @-style addressing in
+    # the eng room chat so people are notified.
+    newTitle = title.replace /([A-Z]+)([:/])/g, '@$1$2'
+    message = "PR #{ number } #{ action }: #{ newTitle } (#{ person }) - #{ url }"
     sendHipChatMessage roomID, message
 
   roomID = process.env.HIPCHAT_ANNOUNCE_ROOM
