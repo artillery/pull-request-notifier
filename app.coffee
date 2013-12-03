@@ -63,6 +63,10 @@ app.post '/', (req, res) ->
   if action is 'synchronize'
     return res.send 200, 'ignored'
 
+  # Trying this: Only announce opened PRs.
+  if action isnt 'opened'
+    return res.send 200, 'ignored'
+
   roomID = process.env.HIPCHAT_DETAIL_ROOM
   if roomID
     # We prefix our PR titles with names of who should review them, like
