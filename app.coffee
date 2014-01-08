@@ -72,7 +72,9 @@ app.post '/', (req, res) ->
     # We prefix our PR titles with names of who should review them, like
     # "IAN/MARK: This fixes the thing". Might as well use @-style addressing in
     # the eng room chat so people are notified.
-    newTitle = title.replace /([A-Z]+)([:/])/g, '@$1 '
+    newTitle = title
+      .replace(/([A-Z]+)([:/])/g, '@$1 ')
+      .replace('@ANYONE', '@ALL')
     message = "PR #{ number } #{ action }: #{ newTitle } (#{ person }) - #{ url }"
     sendHipChatMessage roomID, message
 
