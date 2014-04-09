@@ -64,7 +64,7 @@ app.post '/', (req, res) ->
     return res.send 200, 'ignored'
 
   # Trying this: Only announce opened PRs.
-  if action isnt 'opened'
+  if action not in ['opened', 'reopened']
     return res.send 200, 'ignored'
 
   roomID = process.env.HIPCHAT_DETAIL_ROOM
